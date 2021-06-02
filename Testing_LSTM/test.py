@@ -41,10 +41,11 @@ def Test(stock_code, rl_method, balance, start_date, end_date):
                 os.path.join(settings.BASE_DIR,
                 'data/{}/{}.csv'.format('v3', stock_code)),
                 start_date, end_date, ver='v3')
+    print(chart_data)
 
     # 최소/최대 투자 단위 설정
-    min_trading_unit = max(int(100 / chart_data.iloc[-1]['close']), 1)
-    max_trading_unit = max(int(1000 / chart_data.iloc[-1]['close']), 1)
+    min_trading_unit = 1
+    max_trading_unit = 10
 
 
     learner = ReinforcementLearner(rl_method=rl_method, stock_code=stock_code,

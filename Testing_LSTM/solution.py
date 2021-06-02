@@ -22,7 +22,7 @@ class MyWindow(QWidget):
         self.step = 0
         self.default_stock_item = "종목 선택"
         self.default_algo_item = "알고리즘 선택"
-        self.stock_list = ['Exxon Mobil(XOM)', 'Chevron(CVX)', 'Cimarex Energy(XEC)', 'Hess Corp(HES)']
+        self.stock_list = ['ExxonMobil(XOM)', 'Chevron(CVX)', 'CimarexEnergy(XEC)', 'HessCorp(HES)']
         self.algo_list = ['DDPG','TD3','AC3','DQN']
         self.selectedStock = ""
         self.selectedAlgo = ""
