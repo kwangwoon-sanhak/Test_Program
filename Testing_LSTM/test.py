@@ -20,7 +20,7 @@ def Test(stock_code, rl_method, balance, start_date, end_date):
     output_name=utils.get_time_str()
     # 출력 경로 설정
     output_path = os.path.join(settings.BASE_DIR,
-        'output/{}_{}_{}'.format(output_name, stock_code ,rl_method))
+        'output/{}_{}'.format(stock_code, rl_method))
     if not os.path.isdir(output_path):
         os.makedirs(output_path)
 

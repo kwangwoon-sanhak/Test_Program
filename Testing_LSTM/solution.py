@@ -193,17 +193,24 @@ class MyWindow(QWidget):
 
         for i in reversed(range(self.rightLayOut.count())): 
             self.rightLayOut.itemAt(i).widget().setParent(None)
-        
-        if self.selectedStock == "Exxon Mobil(XOM)":
+
+        path_str = './output/{}_{}/epoch_summary_{}/epoch_summary_result.png'.format(self.selectedStock,
+                                                                                     self.selectedAlgo,
+                                                                                    self.selectedStock)
+        pixmap = QPixmap(path_str)
+
+        """
+        if self.selectedStock == "ExxonMobil(XOM)": # USE
+            
             if self.selectedAlgo == "DDPG":
-                pixmap = QPixmap('../Stock_Trader/test_xon_None_actorcritic/epoch_summary_xon/xom_result.png')
+                pixmap = QPixmap(path_str)
                 self.action = "매도"
 
-        if self.selectedStock == "Hess Corp(HES)":
+        if self.selectedStock == "HessCorp(HES)":
             if self.selectedAlgo == "DDPG":
                 pixmap = QPixmap('../Stock_Trader/test_hes_None_actorcritic/epoch_summary_hes/hes_result.png')
                 self.action = "매수"
-
+        """
         result = QLabel(self)
         result.setPixmap(pixmap) # 이미지 세팅
         result.setContentsMargins(10, 10, 10, 10)

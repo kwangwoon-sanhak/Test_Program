@@ -165,7 +165,7 @@ class ReinforcementLearner:
         )
         self.visualizer.save(os.path.join(
             self.epoch_summary_dir, 
-            'epoch_summary_{}.png'.format(epoch_str))
+            'epoch_summary_result.png')
         )
 
     def run(
