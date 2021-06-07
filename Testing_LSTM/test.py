@@ -41,7 +41,6 @@ def Test(stock_code, rl_method, balance, start_date, end_date):
                 os.path.join(settings.BASE_DIR,
                 'data/{}/{}.csv'.format('v3', stock_code)),
                 start_date, end_date, ver='v3')
-    print(chart_data)
 
     # 최소/최대 투자 단위 설정
     min_trading_unit = 1
