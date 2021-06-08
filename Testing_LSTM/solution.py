@@ -23,6 +23,21 @@ class MyThread(QThread):
             time.sleep(0.1)
             self.change_value.emit(cnt)
 
+class MyThread2(QThread):
+
+    def __init__(self, parent,stock_code, rl_method, balance, start_date,  end_date):
+        super().__init__(parent)
+        self.parent = parent
+        self.stock_code = stock_code
+        self.rl_method = rl_method
+        self.balance=balance
+        self.start_date=start_date
+        self.end_date = end_date
+
+    def run(self):
+        Test(stock_code=self.stock_code, rl_method=self.rl_method, balance=10000, start_date=self.start_date,
+             end_date=self.end_date)
+
 
 class MyWindow(QWidget):
     def __init__(self):
@@ -148,7 +163,7 @@ class MyWindow(QWidget):
             QMessageBox.about(self, "종목 선택 오류", "종목을 선택해주세요.")
             self.stockCb.setCurrentText(self.default_stock_item)
         else:
-            self.selectedStock = text.split('')
+            self.selectedStock = text
 
 
     def onAlgoActivated(self, text):
@@ -170,22 +185,28 @@ class MyWindow(QWidget):
         self.startDate = self.startDateEdit.date().toPyDate().strftime("%Y%m%d")
         self.endDate = self.endDateEdit.date().toPyDate().strftime("%Y%m%d")
 
-        Test(stock_code=self.selectedStock, rl_method=self.selectedAlgo, balance=10000, start_date=self.startDate, end_date=self.endDate)
-
         self.thread = MyThread()
         self.thread.change_value.connect(self.setProgressVal)
         self.thread.start()
+        self.thread2 = MyThread2(self,stock_code=self.selectedStock, rl_method=self.selectedAlgo, balance=10000, start_date=self.startDate, end_date=self.endDate)
+        self.thread2.start()
+       # Test(stock_code=self.selectedStock, rl_method=self.selectedAlgo, balance=10000, start_date=self.startDate, end_date=self.endDate)
+
+
 
     def setProgressVal(self, val):
         self.progressbar.setValue(val)
+
         if val == 100:
+            self.thread2.quit()
+            self.thread2.wait(5000)
             self.showResult()
 
 
     def showResult(self):
         for i in reversed(range(self.rightLayOut.count())): 
             self.rightLayOut.itemAt(i).widget().setParent(None)
-
+        print("끝")
         path_str = './output/{}_{}/epoch_summary_{}/epoch_summary_result.png'.format(self.selectedStock,
                                                                                      self.selectedAlgo,
                                                                                     self.selectedStock)

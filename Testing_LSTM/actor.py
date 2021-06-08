@@ -1,11 +1,10 @@
 import numpy as np
 import tensorflow as tf
-import keras.backend as K
+import tensorflow.keras.backend as K
 
-from keras.initializers import RandomUniform
-from keras.models import Model
-from keras.layers import Input, Dense, Dropout, Reshape, LSTM, Lambda, BatchNormalization, GaussianNoise, Flatten
-
+from tensorflow.keras.initializers import RandomUniform
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input, Dense, Dropout, Reshape, LSTM, Lambda, BatchNormalization, GaussianNoise, Flatten
 
 class ActorNetwork:
     """ Actor Network for the DDPG Algorithm
@@ -18,6 +17,7 @@ class ActorNetwork:
         self.num_steps=num_steps
         self.model = self.network()
         self.target_model = self.network()
+
 
 
     def network(self):
@@ -88,5 +88,7 @@ class ActorNetwork:
 
 
     def load_model(self, model_path):
+
         self.model.load_weights(model_path)
         # self.target_model.load_weights(path)
+
